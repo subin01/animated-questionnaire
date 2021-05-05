@@ -28,8 +28,8 @@ const variant = {
 interface Props {
   item: {
     qid: string
-    question: string
     type: string
+    question: string
     answers: [string]
     chosenAnswer?: string
     button?: string
