@@ -34,8 +34,6 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Install Dependencies
         run: yarn install
-      - name: Typecheck
-        uses: andoshin11/typescript-error-reporter-action@v1.0.2
       - name: Typescript compiler
         uses: iCrawl/action-tsc@v1
       - name: Build for Prod
