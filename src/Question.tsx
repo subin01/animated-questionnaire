@@ -27,15 +27,15 @@ const variant = {
 
 interface Props {
   item: {
-    qid: string
-    type: string
-    question: string
-    answers: [string]
-    chosenAnswer?: string
-    button?: string
+    qid: string;
+    type: string;
+    question: string;
+    answers: [string];
+    chosenAnswer?: string;
+    button?: string;
   }
-  nextSlide: () => {}
-  chooseAnswer: () => {}
+  nextSlide: () => {};
+  chooseAnswer: () => {};
 }
 
 export function Options({ qid, answers, chosenAnswer, chooseAnswer }) {
