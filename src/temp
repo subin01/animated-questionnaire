@@ -1,0 +1,45 @@
+import React, { useState } from "react";
+
+import Question from "./Question";
+import "./styles.scss";
+import qlist from "./qlist";
+
+export default function App() {
+  const [screen, setScreen] = useState(1);
+
+  return (
+    <>
+      <main>
+        {screen === 1 && (
+          <Question>
+            <p className="h1">
+              We’ll ask you about your business, your brand, your target market,
+              this project and, finally, about you.
+            </p>
+            <p className="h1">Ready?</p>
+            <div className="button-container">
+              <button>Get started &rarr;</button>
+            </div>
+            {/* <PlayerSelection /> */}
+          </Question>
+        )}
+
+        {screen === 2 && (
+          <Question>
+            <p className="h1">Question one</p>
+            <p className="h1">Ready?</p>
+            <div className="button-container">
+              <button>Next &rarr;</button>
+            </div>
+          </Question>
+        )}
+
+        <br />
+        <div className="button-container">
+          <button onClick={() => setScreen(screen - 1)}>&larr;</button>
+          <button onClick={() => setScreen(screen + 1)}>&rarr;</button>
+        </div>
+      </main>
+    </>
+  );
+}
