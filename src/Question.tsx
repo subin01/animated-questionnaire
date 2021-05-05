@@ -33,7 +33,7 @@ interface Props {
     answers: [string];
     chosenAnswer?: string;
     button?: string;
-  }
+  };
   nextSlide: () => {};
   chooseAnswer: () => {};
 }
