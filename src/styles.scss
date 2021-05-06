@@ -1,30 +1,36 @@
-@font-face {
-  font-family: "Westpac-bold";
-  src: url("https://www.westpac.com.au/etc/designs/wbc/clientlib-all/assets/brand/font/WestpacLH-v2.003-Bold.otf")
-    format("OpenType");
-  font-weight: normal;
-  font-style: normal;
-}
+
+// nsw-primary-blue	#002664	
+ 
+
+// nsw-primary-highlight	#d7153a	
+ 
+
+// nsw-secondary-blue	#2e5299	 #002664
+ 
+
+// nsw-tertiary-blue	#0085b3
+
 
 :root {
-  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Ubuntu",
-    "Helvetica Neue", sans-serif;
-  --font-heading: "Westpac-bold", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "Roboto", "Ubuntu", "Helvetica Neue", sans-serif;
+  --font-body: 'Montserrat', Helvetica,Arial, -apple-system, sans-serif;
+  --font-heading: 'Montserrat', Helvetica,Arial, -apple-system, sans-serif;
   --color-bg: hsl(0, 0%, 100%);
-  --color-brand: hsl(4, 61%, 51%);
-  --color-secondary: hsl(281, 78%, 47%);
-  --color-dark: hsl(244, 48%, 21%);
+  --color-brand: #d7153a;
+  --color-primary: #002664;
+  --color-secondary: #2e5299;
+  --color-dark: #002664;
   --color-dark1: hsl(226, 21%, 12%);
   --color-black-trans1: rgba(0, 0, 0, 0.1);
   --color-black-trans2: rgba(0, 0, 0, 0.5);
-  --color-white-trans1: rgba(255, 255, 255, 0.2);
+  --color-black-trans3: rgba(0, 0, 0, 0.8);
+  --color-white-trans1: rgba(255, 255, 255, 0.3);
   --color-white-trans2: rgba(255, 255, 255, 0.5);
   --color-white-trans3: rgba(255, 255, 255, 0.8);
 }
 
 * {
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
 }
 
 iframe {
@@ -33,7 +39,7 @@ iframe {
 
 html {
   font-family: var(--font-body);
-  font-weight: 200;
+  font-weight: 300;
   font-size: 10px;
   margin: 0;
   padding: 0;
@@ -49,18 +55,25 @@ html {
 }
 
 body {
-  background: var(--color-brand);
+  background: var(--color-primary);
   color: rgba(255, 255, 255, 1);
   margin: 0;
   line-height: 1.4;
-//   background: var(--color-brand) url('westpac-logo-trans.svg') no-repeat;
-  background-position: 5vw bottom;
+  background: var(--color-dark) url('nsw-logo-white.svg') no-repeat;
+  background-position: 5vw 120%;
   background-size: 160vw;
+}
+
+@media only screen and (min-width: 760px) {
+  body {
+    background-position: 28vw 59vh;
+    background-size: 100vw;
+  }
 }
 
 @media only screen and (min-width: 1020px) {
   body {
-    background-position: 35vw bottom;
+    background-position: 42vw 40vh;
     background-size: 80vw;
   }
 }
@@ -93,7 +106,8 @@ article {
   .msg {
     font-size: 1.3rem;
     color: var(--color-white-trans3);
-    padding-left: 1.5rem;
+    margin-top: 1.5rem;
+    min-height: 1.5em;
   }
 }
 
@@ -103,58 +117,113 @@ button {
   border-radius: 0.5rem;
   min-width: 14rem;
   background: white;
+  background:var(--color-brand);
+  color: white;
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: bold;
   cursor: pointer;
-  transition: all 500ms ease-in-out;
-  box-shadow: 0 0 1rem 0 var(--color-black-trans1);
+  transform: scale(1.01);
+  transition: all 200ms ease-out;
+  box-shadow: 0 0 1rem 0 transparent;
 
   &:disabled {
-    box-shadow: none !important;
+    transform: scale(1) !important;
+    color: var(--color-white-trans2);
     cursor: not-allowed;
   }
 
   &:hover {
-    box-shadow: 0 0 1rem 0 white;
+    // box-shadow: 0 0 2rem 0 var(--color-black-trans3);
+    transform: scale(1.05);
+  }
+}
+
+
+kbd {
+  color: var(--color-white-trans1);
+  border: 1px solid;
+  border-radius: 4px;
+  min-width: 2em;
+  padding: 0 0.5rem;
+  display: inline-block;
+  text-align: center;
+  margin: 0 1.5rem;
+  font-size: 1.2rem;
+  transition: all 200ms linear;
+  
+
+  &:hover {
+    color: var(--color-white-trans2);
+  }
+}
+
+.tips {
+  margin-top: 4rem;
+  text-align: left;
+  width: 35rem;
+  font-size: 1.3rem;
+  color: var(--color-white-trans3);
+  transform-origin: 50%;
+
+  kbd {
+    margin: 0.5rem;
   }
 }
 
 ol {
   font-size: 1.8rem;
   margin: 0;
-  padding-left: 2.5rem;
+  padding: 0;
 }
 
 li {
   margin-bottom: 1.5rem;
   padding-left: 1rem;
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  // font-weight: bold;
+
+  kbd {
+    margin:0 1.5rem 0.5rem 0;
+    font-size: 1.4rem;
+  }
+
+  &:hover {
+    kbd {
+      color: var(--color-white-trans2);
+      // border-color: var(--color-brand);
+    }
+  }
 }
 
 a {
   color: white;
   text-decoration: none;
-  border-bottom: 0.2rem solid var(--color-black-trans1);
-  transition: all 300ms ease-out;
+  border-bottom: 0.3rem solid var(--color-black-trans1);
+  transition: all 400ms ease-out;
   padding-bottom: 0.25rem;
 
   &:hover {
-    border-color: var(--color-black-trans2);
+    border-color: var(--color-brand);
   }
 }
 
 .active {
-  color:  var(--color-dark1);  
   a {
-    color:  var(--color-dark1);  
-    border-color: var(--color-dark1);  
+    border-color: var(--color-brand);  
   }
 }
 
 h1,
 .h1 {
   font-family: var(--font-heading);
-  font-weight: 200;
+  font-weight: 300;
+  // font-weight: 800;
   font-size: 3rem;
 }
 
@@ -162,29 +231,31 @@ nav {
  position: fixed;
  top: 0;
  left: 0;
- height: 4rem;
+ height: 6rem;
  width: 100%;
  padding: 0 2.5rem;
  font-size: 1.4rem;
  border-bottom: 1px solid var(--color-black-trans1);
  display: flex;
  align-items: center;
-  justify-content: space-between;
+ justify-content: space-between;
+ background: White;
 
   .right {
     display: flex;
   }
 
   .logo {
-    height: 2rem;
-    width: 6rem;
-//     background: var(--color-brand) url('westpac-logo-white.svg') no-repeat;
+    height: 5rem;
+    width: 13rem;
+    background: url('ServiceNSW-logo.png') no-repeat;
+    background-size: contain; 
     text-indent: -9999px;
   }
 
  .slide {
    margin-right: 2rem;
-   color: var(--color-white-trans3);
+   color: var(--color-primary);
    span { 
     color: var(--color-black-trans2);
     padding: 0 0.3rem;
@@ -195,6 +266,7 @@ nav {
    padding: 0.2rem;
    min-width: 6rem;
    margin-left: 0.5rem;
+   background: var(--color-primary)
  }
 }
 
