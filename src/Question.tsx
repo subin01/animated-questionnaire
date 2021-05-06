@@ -1,14 +1,13 @@
-// @ts-nocheck
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { useHotkeys } from 'react-hotkeys-hook'
+import React from 'react';
+import { motion } from 'framer-motion';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 const spring = {
   type: 'spring',
   stiffness: 700,
   damping: 25,
   duration: 1,
-}
+};
 
 const questionVariants = {
   hidden: { opacity: 0, translateY: 200 },
@@ -20,68 +19,79 @@ const questionVariants = {
       delayChildren: 0.3,
     },
   },
-}
+};
 
 const variant = {
   hidden: { opacity: 0, translateY: 50 },
   show: { opacity: 1, translateY: 0 },
+};
+
+interface IOptionsProps {
+  qid: string;
+  answers: [string];
+  chosenAnswer?: string;
+  chooseAnswer(qid: string, answer: string | undefined): void;
 }
 
-interface Props {
-  item: {
-    qid: string
-    type: string
-    question: string
-    answers: [string]
-    chosenAnswer?: string
-    button?: string
-  }
-  nextSlide: () => {}
-  chooseAnswer: () => {}
-}
-
-export function Options({ qid, answers, chosenAnswer, chooseAnswer }) {
+export function Options({ qid, answers, chosenAnswer, chooseAnswer }: IOptionsProps) {
   useHotkeys('1', () => {
-    chooseAnswer(qid, answers && answers[0])
-  })
+    chooseAnswer(qid, answers && answers[0]);
+  });
   useHotkeys('2', () => {
-    chooseAnswer(qid, answers && answers[1])
-  })
+    chooseAnswer(qid, answers && answers[1]);
+  });
   useHotkeys('3', () => {
-    chooseAnswer(qid, answers && answers[2])
-  })
+    chooseAnswer(qid, answers && answers[2]);
+  });
   useHotkeys('4', () => {
-    chooseAnswer(qid, answers && answers[3])
-  })
-  return answers.map((ans, i) => (
-    <motion.li
-      key={i}
-      variants={variant}
-      onClick={() => chooseAnswer(qid, ans)}
-      className={`${chosenAnswer === ans ? 'active' : ''}`}
-    >
-      <kbd title={`Key ${i + 1}`}>{i + 1}</kbd>
-      <a href="#">{ans}</a>
-    </motion.li>
-  ))
+    chooseAnswer(qid, answers && answers[3]);
+  });
+  return (
+    <ol>
+      {answers.map((ans, i) => (
+        <motion.li
+          key={i}
+          variants={variant}
+          onClick={() => chooseAnswer(qid, ans)}
+          className={`${chosenAnswer === ans ? 'active' : ''}`}
+        >
+          <kbd title={`Key ${i + 1}`}>{i + 1}</kbd>
+          <a href="#">{ans}</a>
+        </motion.li>
+      ))}
+    </ol>
+  );
 }
 
-export default function Question({ item, chooseAnswer, nextSlide }: Props) {
+interface IProps {
+  item: {
+    qid: string;
+    type: string;
+    question: string;
+    answers?: string[];
+    chosenAnswer?: string;
+    button?: string;
+  };
+  nextSlide(): void;
+  chooseAnswer(qid: string, answer: string | undefined): void;
+}
+
+export default function Question({ item, chooseAnswer, nextSlide }: IProps) {
   // const [answer, setAnswer] = useState(item.chosenAnswer)
 
-  const isWelcomeSlide = item.type === 'welcome'
+  const isWelcomeSlide = item.type === 'welcome';
   function isEnableNext() {
-    const hasChosenAnswer = typeof item.chosenAnswer !== 'undefined'
-    return hasChosenAnswer || isWelcomeSlide
+    const hasChosenAnswer = typeof item.chosenAnswer !== 'undefined';
+    return hasChosenAnswer || isWelcomeSlide;
   }
 
   const handleNextSlide = () => {
     if (isEnableNext()) {
-      nextSlide()
+      nextSlide();
     }
-  }
+  };
 
-  useHotkeys('enter', handleNextSlide)
+  useHotkeys('enter', handleNextSlide);
 
   return (
     <motion.article
@@ -95,16 +105,14 @@ export default function Question({ item, chooseAnswer, nextSlide }: Props) {
         {item.question}
       </motion.p>
       {item.type === 'options' && (
-        <ol>
-          <Options
-            qid={item.qid}
-            answers={item.answers}
-            chosenAnswer={item.chosenAnswer}
-            chooseAnswer={chooseAnswer}
-          />
-        </ol>
+        <Options
+          qid={item.qid}
+          answers={item.answers}
+          chosenAnswer={item.chosenAnswer}
+          chooseAnswer={chooseAnswer}
+        />
       )}
-      <motion.div variants={item} className="button-container">
+      <motion.div variants={variant} className="button-container">
         <button onClick={handleNextSlide} disabled={!isEnableNext()}>
           {item.button}
         </button>
@@ -121,5 +129,5 @@ export default function Question({ item, chooseAnswer, nextSlide }: Props) {
         </motion.div>
       )}
     </motion.article>
-  )
+  );
 }

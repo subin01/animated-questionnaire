@@ -1,31 +1,40 @@
-// @ts-nocheck
-import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-import Question from './Question'
-import './styles.scss'
-import qdata from './questions-list.js'
+import Question from './Question';
+import './styles.scss';
+import qdata from './questions-list.js';
 
-const item = {
+const variant = {
   hidden: { opacity: 0, translateY: -100 },
   show: { opacity: 1, translateY: 0 },
+};
+
+interface IData {
+  qid: string;
+  question: string;
+  type: string;
+  button: string;
+  answers?: string[];
+  chosenAnswer?: string;
 }
 
 export default function App() {
-  const length = qdata.length - 1
+  const length = qdata.length - 1;
 
-  const [questionsList, setQuestionsList] = useState(qdata)
-  const [slide, setSlide] = useState(0)
+  const [questionsList, setQuestionsList] = useState<Array<IData>>(qdata);
+  const [slide, setSlide] = useState(0);
 
-  function handleNextSlide(index) {
-    if (index > length || index < 0) return
-    setSlide(index)
+  function handleNextSlide(index: number) {
+    if (index > length || index < 0) return;
+    setSlide(index);
   }
 
-  function handleChooseAnswer(qid: string, answer: string) {
-    const updatedQuestion = questionsList.find((q) => q.qid === qid)
-    updatedQuestion.chosenAnswer = answer
-    setQuestionsList([...questionsList, updatedQuestion])
+  function handleChooseAnswer(qid: string, answer: string | undefined) {
+    const updatedQuestion = questionsList.find((q) => q.qid === qid);
+    if (!updatedQuestion) return;
+    updatedQuestion.chosenAnswer = answer;
+    setQuestionsList([...questionsList, updatedQuestion]);
   }
 
   return (
@@ -47,7 +56,7 @@ export default function App() {
         {slide > 0 && (
           <motion.div
             className="right"
-            variants={item}
+            variants={variant}
             initial="hidden"
             animate="show"
             transition={{ delay: 0.5, duration: 1 }}
@@ -65,5 +74,5 @@ export default function App() {
         )}
       </motion.nav>
     </main>
-  )
+  );
 }
