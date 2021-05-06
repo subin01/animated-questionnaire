@@ -1,16 +1,3 @@
-
-// nsw-primary-blue	#002664	
- 
-
-// nsw-primary-highlight	#d7153a	
- 
-
-// nsw-secondary-blue	#2e5299	 #002664
- 
-
-// nsw-tertiary-blue	#0085b3
-
-
 :root {
   --font-body: 'Montserrat', Helvetica,Arial, -apple-system, sans-serif;
   --font-heading: 'Montserrat', Helvetica,Arial, -apple-system, sans-serif;
@@ -140,24 +127,6 @@ button {
 }
 
 
-kbd {
-  color: var(--color-white-trans1);
-  border: 1px solid;
-  border-radius: 4px;
-  min-width: 2em;
-  padding: 0 0.5rem;
-  display: inline-block;
-  text-align: center;
-  margin: 0 1.5rem;
-  font-size: 1.2rem;
-  transition: all 200ms linear;
-  
-
-  &:hover {
-    color: var(--color-white-trans2);
-  }
-}
-
 .tips {
   margin-top: 4rem;
   text-align: left;
@@ -180,13 +149,9 @@ ol {
 li {
   margin-bottom: 1.5rem;
   padding-left: 1rem;
-  list-style: none;
-  padding-left: 0;
-  margin-left: 0;
+  margin-left: 2rem;
   width: fit-content;
-  display: flex;
   align-items: center;
-  // font-weight: bold;
 
   kbd {
     margin:0 1.5rem 0.5rem 0;
@@ -198,6 +163,41 @@ li {
       color: var(--color-white-trans2);
       // border-color: var(--color-brand);
     }
+  }
+}
+
+/* Keyboard shortcuts only on Desktop */
+kbd, .keyboardTips {
+  display: none;
+}
+
+
+@media only screen and (min-width: 1100px) and (min-height: 800px) {
+  .keyboardTips {
+    display: block;
+  }
+  kbd {
+    color: var(--color-white-trans1);
+    border: 1px solid;
+    border-radius: 4px;
+    min-width: 2em;
+    padding: 0 0.5rem;
+    display: inline-block;
+    text-align: center;
+    margin: 0 1.5rem;
+    font-size: 1.2rem;
+    transition: all 200ms linear;
+    
+
+    &:hover {
+      color: var(--color-white-trans2);
+    }
+  }
+
+  li {
+    display: flex;
+    margin-left: 0rem;
+    list-style: none;
   }
 }
 
@@ -264,9 +264,10 @@ nav {
 
  button {
    padding: 0.2rem;
-   min-width: 6rem;
+   padding-bottom: 0.5rem;
+   min-width: 5rem;
    margin-left: 0.5rem;
-   background: var(--color-primary)
+   background: var(--color-primary);
  }
 }
 

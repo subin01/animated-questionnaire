@@ -43,7 +43,7 @@ export default function App() {
       ))}
 
       <motion.nav>
-        <div className="logo">Westpac</div>
+        <div className="logo">NSW</div>
         {slide > 0 && (
           <motion.div
             className="right"

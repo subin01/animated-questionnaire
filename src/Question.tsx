@@ -113,7 +113,7 @@ export default function Question({ item, chooseAnswer, nextSlide }: Props) {
       </motion.div>
       {isWelcomeSlide && (
         <motion.div
-          className="tips"
+          className="keyboardTips"
           animate={{ opacity: [0, 1], y: [10, 0] }}
           transition={{ duration: 0.5, delay: 2 }}
         >
